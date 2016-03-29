@@ -24,15 +24,14 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                 function ImaggaService(http) {
                     this.http = http;
                 }
-                ImaggaService.prototype.getTag = function () {
+                ImaggaService.prototype.getTag = function (urlimage) {
                     var headers = new http_1.Headers();
                     headers.append('authorization', "Basic YWNjXzAwZTFlOTZiNzMwYWUyNDpmYjM5NzU5NWQ5MDQ2ZTcwMTQ3ZGVjYjE0MTQ4ZjQyMQ==");
                     headers.append('accept', "application/json");
-                    this.http.get(' http://api.imagga.com/v1/tagging?url=http://cm-nautisme.fr/wp-content/uploads/2013/07/bateau-a-moteur-nice.jpg&version=2', {
+                    return this.http.get(' http://api.imagga.com/v1/tagging?url=' + urlimage + '&version=2', {
                         headers: headers
                     })
-                        .map(function (res) { return res.json(); })
-                        .subscribe(function (data) { }, function (err) { });
+                        .map(function (res) { return res.json(); });
                 };
                 ImaggaService.prototype.getLoginUrl = function () {
                 };

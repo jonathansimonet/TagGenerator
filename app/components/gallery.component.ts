@@ -6,7 +6,7 @@ import {ImaggaService} from "../services/imagga.services";
 @Component({
     selector: 'my-app',
     templateUrl: 'app/templates/gallery.html',
-    providers: [InstagramService]
+    providers: [InstagramService, ImaggaService]
 })
 export class GalleryComponent {
     url: string;
@@ -27,7 +27,12 @@ export class GalleryComponent {
         );
     }
 
-    getTag(){
-        this._imaggaService.getTag();
+    getTag(url: string){
+        this._imaggaService.getTag(url).subscribe(
+            (tags) => {
+                console.log(tags.results[0].tags);
+            }
+
+        );
     }
 }

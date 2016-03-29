@@ -35,14 +35,16 @@ System.register(['angular2/core', "../services/instagram.services", "../services
                         _this.medias = gallery.data;
                     });
                 };
-                GalleryComponent.prototype.getTag = function () {
-                    this._imaggaService.getTag();
+                GalleryComponent.prototype.getTag = function (url) {
+                    this._imaggaService.getTag(url).subscribe(function (tags) {
+                        console.log(tags.results[0].tags);
+                    });
                 };
                 GalleryComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         templateUrl: 'app/templates/gallery.html',
-                        providers: [instagram_services_1.InstagramService]
+                        providers: [instagram_services_1.InstagramService, imagga_services_1.ImaggaService]
                     }), 
                     __metadata('design:paramtypes', [instagram_services_1.InstagramService, imagga_services_1.ImaggaService])
                 ], GalleryComponent);
