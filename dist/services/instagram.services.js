@@ -32,7 +32,6 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                     this.API_OAUTH_URL = 'https://api.instagram.com/oauth/authorize';
                     this.API_OAUTH_TOKEN_URL = 'https://api.instagram.com/oauth/access_token';
                     this._scopes = 'basic+likes+comments+relationships';
-                    this.token = '46089652.f6f5aa1.71081fc96cac4672b2aac6d00b7d0101';
                 }
                 InstagramService.prototype.getLoginUrl = function () {
                     return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' + this._scopes + '&response_type=token').map(function (res) { return res.url; });
@@ -40,7 +39,6 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                 InstagramService.prototype.getGallery = function () {
                     console.log(InstagramService.getCookie('token'));
                     return this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + InstagramService.getCookie('token')).map(function (res) { return res.json(); });
-                    console.log(this.extractTokenUrl());
                 };
                 InstagramService.prototype.extractTokenUrl = function () {
                     var urlarray;
@@ -65,8 +63,8 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                     var c;
                     for (var i = 0; i < caLen; i += 1) {
                         c = ca[i].replace(/^\s\+/g, "");
-                        if (c.indexOf(cookieName) == 1) {
-                            return c.substring(cookieName.length + 2, c.length);
+                        if (c.search("token") == 0) {
+                            return c.substring(cookieName.length + 1, c.length);
                         }
                     }
                     return "";
@@ -81,7 +79,6 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                         'redirect_uri': this._redirecturi,
                         'code': code };
                     result = this._makeOAuthCall(apiData);
-                    console.log(result);
                     return !token ? result : result.access_token;
                 };
                 InstagramService.prototype._makeOAuthCall = function (apiData) {

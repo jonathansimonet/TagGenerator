@@ -16,7 +16,6 @@ export class InstagramService {
     private API_OAUTH_URL = 'https://api.instagram.com/oauth/authorize';
     private API_OAUTH_TOKEN_URL = 'https://api.instagram.com/oauth/access_token';
     private _scopes = 'basic+likes+comments+relationships';
-    private token = '46089652.f6f5aa1.71081fc96cac4672b2aac6d00b7d0101';
 
 
     getLoginUrl() {
@@ -27,7 +26,6 @@ export class InstagramService {
     getGallery(){
         console.log(InstagramService.getCookie('token'));
         return this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token='+InstagramService.getCookie('token')).map((res:Response) => res.json());
-        console.log(this.extractTokenUrl());
     }
 
     extractTokenUrl() {
@@ -55,8 +53,8 @@ export class InstagramService {
 
         for (let i: number = 0; i < caLen; i += 1) {
             c = ca[i].replace(/^\s\+/g, "");
-            if (c.indexOf(cookieName) == 1) {
-                return c.substring(cookieName.length+2, c.length);
+            if (c.search("token") == 0) {
+                return c.substring(cookieName.length+1, c.length);
             }
         }
         return "";
@@ -73,7 +71,6 @@ export class InstagramService {
         'redirect_uri' : this._redirecturi,
         'code' : code};
         result = this._makeOAuthCall(apiData);
-        console.log(result);
         return !token ? result : result.access_token;
     }
 
