@@ -1,4 +1,4 @@
-System.register(['angular2/core', "../services/instagram.services"], function(exports_1, context_1) {
+System.register(['angular2/core', "../services/instagram.services", "../services/imagga.services"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', "../services/instagram.services"], function(ex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, instagram_services_1;
+    var core_1, instagram_services_1, imagga_services_1;
     var GalleryComponent;
     return {
         setters:[
@@ -19,11 +19,15 @@ System.register(['angular2/core', "../services/instagram.services"], function(ex
             },
             function (instagram_services_1_1) {
                 instagram_services_1 = instagram_services_1_1;
+            },
+            function (imagga_services_1_1) {
+                imagga_services_1 = imagga_services_1_1;
             }],
         execute: function() {
             GalleryComponent = (function () {
-                function GalleryComponent(_instagramService) {
+                function GalleryComponent(_instagramService, _imaggaService) {
                     this._instagramService = _instagramService;
+                    this._imaggaService = _imaggaService;
                 }
                 GalleryComponent.prototype.ngOnInit = function () {
                     var _this = this;
@@ -33,13 +37,16 @@ System.register(['angular2/core', "../services/instagram.services"], function(ex
                         _this.medias = gallery.data;
                     });
                 };
+                GalleryComponent.prototype.getTag = function () {
+                    this._imaggaService.getTag();
+                };
                 GalleryComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         templateUrl: 'app/templates/gallery.html',
                         providers: [instagram_services_1.InstagramService]
                     }), 
-                    __metadata('design:paramtypes', [instagram_services_1.InstagramService])
+                    __metadata('design:paramtypes', [instagram_services_1.InstagramService, imagga_services_1.ImaggaService])
                 ], GalleryComponent);
                 return GalleryComponent;
             }());
