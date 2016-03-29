@@ -26,7 +26,8 @@ System.register(['angular2/core', "../services/instagram.services"], function(ex
                 GalleryComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this._instagramService.getGallery().subscribe(function (gallery) {
-                        console.log(gallery);
+                        _this.username_profile = gallery.data[0].user.username;
+                        _this.photo_profile = gallery.data[0].user.profile_picture;
                         _this.medias = gallery.data;
                     });
                 };

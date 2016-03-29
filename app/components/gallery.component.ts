@@ -10,14 +10,18 @@ import {RouteConfig} from "angular2/router";
 export class GalleryComponent {
     url: string;
     medias: Array<string>;
+    username_profile: string;
+    photo_profile: string;
     constructor(private _instagramService:InstagramService) {
 
     }
     ngOnInit(){
         this._instagramService.getGallery().subscribe(
             (gallery) => {
-                console.log(gallery);
+                this.username_profile = gallery.data[0].user.username;
+                this.photo_profile = gallery.data[0].user.profile_picture;
                this.medias = gallery.data;
+
             }
         );
     }

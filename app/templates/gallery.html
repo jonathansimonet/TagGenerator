@@ -1,4 +1,7 @@
-<h2>toto</h2>
+<span>{{username_profile}}</span>
+<img src="{{photo_profile}}">
 <li *ngFor="#media of medias">
     <img src="{{media.images.low_resolution.url}}">
+    <span>{{media.likes.count}} likes</span>
+    <span>{{media.comments.count}} comments</span>
 </li>
