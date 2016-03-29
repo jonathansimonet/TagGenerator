@@ -2,6 +2,7 @@ import {Instagram} from "../classes/instagram";
 import {Http, HTTP_PROVIDERS, Response} from 'angular2/http';
 import 'rxjs/Rx';
 import {Injectable} from 'angular2/core';
+import {CookieService} from 'angular2-cookie/core';
 @Injectable()
 export class InstagramService {
 
@@ -19,15 +20,50 @@ export class InstagramService {
 
 
     getLoginUrl() {
-            return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' +this._scopes+ '&response_type=token').map((res:Response)=> res.url);
+            return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' +this._scopes+ '&response_type=token').map((res:Response)=> res);
     }
 
 
-    getImage(){
-        var json;
-        json = this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token='+this.token).map((res:Response) => res.json());
-        console.log(json);
+    getGallery(){
+
+        this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token='+InstagramService.getCookie('token')).map((res:Response) => res.json());
+        //console.log(json);
+        console.log(InstagramService.extractTokenUrl());
     }
+
+    static extractTokenUrl () {
+        let urlarray;
+        var t = window.location.href ;
+        urlarray = t.split('access_token=');
+        if(urlarray != null)
+            InstagramService.setCookie('token',urlarray[1],1);
+
+        return InstagramService.getCookie('token');
+
+    }
+
+    static setCookie(name: string, value: string, expireDays: number, path: string = "") {
+        let d:Date = new Date();
+        d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
+        let expires:string = "expires=" + d.toUTCString();
+        document.cookie = name + "=" + value + "; " + expires + (path.length > 0 ? "; path=" + path : "");
+    }
+
+    static getCookie(name: string) {
+        let ca: Array<string> = document.cookie.split(';');
+        let caLen: number = ca.length;
+        let cookieName = name + "=";
+        let c: string;
+
+        for (let i: number = 0; i < caLen; i += 1) {
+            c = ca[i].replace(/^\s\+/g, "");
+            if (c.indexOf(cookieName) == 0) {
+                return c.substring(cookieName.length, c.length);
+            }
+        }
+        return "";
+    }
+
 
     getOAuthToken(code, token = false)
     {

@@ -26,9 +26,12 @@ export class AppComponent {
     ngOnInit(){
          this._instagramService.getLoginUrl().subscribe(
             (data) => {
-                this.url = data;
+                console.log(data);
+                //this.url = data;
             }
         );
+
+        this._instagramService.getGallery();
     }
 
     getLoginUrl() {

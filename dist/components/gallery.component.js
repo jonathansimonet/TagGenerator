@@ -1,4 +1,4 @@
-System.register(['angular2/core', "../services/instagram.services"], function(exports_1, context_1) {
+System.register(['angular2/core', "../services/instagram.services", "angular2/router"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', "../services/instagram.services"], function(ex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, instagram_services_1;
+    var core_1, instagram_services_1, router_1;
     var GalleryComponent;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', "../services/instagram.services"], function(ex
             },
             function (instagram_services_1_1) {
                 instagram_services_1 = instagram_services_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             GalleryComponent = (function () {
@@ -33,7 +36,10 @@ System.register(['angular2/core', "../services/instagram.services"], function(ex
                         selector: 'my-app',
                         templateUrl: 'app/templates/gallery.html',
                         providers: [instagram_services_1.InstagramService]
-                    }), 
+                    }),
+                    router_1.RouteConfig([
+                        { path: '/gallery', name: 'Gallery', component: GalleryComponent },
+                    ]), 
                     __metadata('design:paramtypes', [instagram_services_1.InstagramService])
                 ], GalleryComponent);
                 return GalleryComponent;

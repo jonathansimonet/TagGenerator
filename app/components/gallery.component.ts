@@ -7,6 +7,10 @@ import {RouteConfig} from "angular2/router";
     templateUrl: 'app/templates/gallery.html',
     providers: [InstagramService]
 })
+@RouteConfig([
+    {path:'/gallery', name: 'Gallery', component: GalleryComponent},
+
+])
 export class GalleryComponent {
     url: string;
     constructor(private _instagramService:InstagramService) {

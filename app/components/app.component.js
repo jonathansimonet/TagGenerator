@@ -33,10 +33,11 @@ System.register(['angular2/core', "./login.component", "../services/instagram.se
                     this._instagramService = _instagramService;
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    var _this = this;
                     this._instagramService.getLoginUrl().subscribe(function (data) {
-                        _this.url = data;
+                        console.log(data);
+                        //this.url = data;
                     });
+                    this._instagramService.getGallery();
                 };
                 AppComponent.prototype.getLoginUrl = function () {
                     this._instagramService.getLoginUrl();
