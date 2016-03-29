@@ -1,4 +1,4 @@
-System.register(['angular2/core', "../services/instagram.services", "../services/imagga.services"], function(exports_1) {
+System.register(['angular2/core', "../services/instagram.services", "../services/imagga.services", 'angular2/common', 'ng2-bs3-modal/ng2-bs3-modal'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', "../services/instagram.services", "../services
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, instagram_services_1, imagga_services_1;
+    var core_1, instagram_services_1, imagga_services_1, common_1, ng2_bs3_modal_1;
     var GalleryComponent;
     return {
         setters:[
@@ -20,13 +20,26 @@ System.register(['angular2/core', "../services/instagram.services", "../services
             },
             function (imagga_services_1_1) {
                 imagga_services_1 = imagga_services_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
+            },
+            function (ng2_bs3_modal_1_1) {
+                ng2_bs3_modal_1 = ng2_bs3_modal_1_1;
             }],
         execute: function() {
             GalleryComponent = (function () {
-                function GalleryComponent(_instagramService, _imaggaService) {
+                function GalleryComponent(_instagramService, _imaggaService, _fb) {
                     this._instagramService = _instagramService;
                     this._imaggaService = _imaggaService;
+                    this._fb = _fb;
                 }
+                GalleryComponent.prototype.close = function () {
+                    this.modal.close();
+                };
+                GalleryComponent.prototype.open = function () {
+                    this.modal.open();
+                };
                 GalleryComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this._instagramService.getGallery().subscribe(function (gallery) {
@@ -34,19 +47,33 @@ System.register(['angular2/core', "../services/instagram.services", "../services
                         _this.photo_profile = gallery.data[0].user.profile_picture;
                         _this.medias = gallery.data;
                     });
-                };
-                GalleryComponent.prototype.getTag = function (url) {
-                    this._imaggaService.getTag(url).subscribe(function (tags) {
-                        console.log(tags.results[0].tags);
+                    this.commentForm = this._fb.group({
+                        "id": ['', common_1.Validators.required],
+                        "comment": ['', common_1.Validators.required]
                     });
                 };
+                GalleryComponent.prototype.getTag = function (url) {
+                    var _this = this;
+                    this._imaggaService.getTag(url).subscribe(function (data) {
+                        _this.listtags = data.results[0].tags;
+                    });
+                };
+                GalleryComponent.prototype.addComment = function () {
+                    console.log(this.commentForm.value);
+                    //this._instagramService.addComment(id,text);
+                };
+                __decorate([
+                    core_1.ViewChild('myModal'), 
+                    __metadata('design:type', ng2_bs3_modal_1.ModalComponent)
+                ], GalleryComponent.prototype, "modal", void 0);
                 GalleryComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         templateUrl: 'app/templates/gallery.html',
-                        providers: [instagram_services_1.InstagramService, imagga_services_1.ImaggaService]
+                        providers: [instagram_services_1.InstagramService, imagga_services_1.ImaggaService],
+                        directives: [ng2_bs3_modal_1.MODAL_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [instagram_services_1.InstagramService, imagga_services_1.ImaggaService])
+                    __metadata('design:paramtypes', [instagram_services_1.InstagramService, imagga_services_1.ImaggaService, common_1.FormBuilder])
                 ], GalleryComponent);
                 return GalleryComponent;
             })();
