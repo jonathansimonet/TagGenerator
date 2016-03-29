@@ -24,8 +24,18 @@ System.register(['angular2/core', "../services/instagram.services"], function(ex
                     this._instagramService = _instagramService;
                     this.title = "Tag Generator";
                 }
+                LoginComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this._instagramService.getLoginUrl().subscribe(function (data) {
+                        _this.url = data;
+                    });
+                };
                 LoginComponent.prototype.getLoginUrl = function () {
                     this._instagramService.getLoginUrl();
+                };
+                LoginComponent.prototype.getToken = function () {
+                    console.log('testtoken');
+                    this._instagramService.extractTokenUrl();
                 };
                 LoginComponent = __decorate([
                     core_1.Component({

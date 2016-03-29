@@ -27,7 +27,7 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                     this.http = http;
                     this._clientid = 'f6f5aa12a4ac4a198be1b65f7c12160a';
                     this._clientsecret = '0bd1d78e05594e54895c0b9d010cf28a';
-                    this._redirecturi = 'http://localhost:8080';
+                    this._redirecturi = 'http://localhost:8080/gallery';
                     this._baseUrl = 'https://api.instagram.com/v1/';
                     this.API_OAUTH_URL = 'https://api.instagram.com/oauth/authorize';
                     this.API_OAUTH_TOKEN_URL = 'https://api.instagram.com/oauth/access_token';
@@ -35,18 +35,19 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                     this.token = '46089652.f6f5aa1.71081fc96cac4672b2aac6d00b7d0101';
                 }
                 InstagramService.prototype.getLoginUrl = function () {
-                    return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' + this._scopes + '&response_type=token').map(function (res) { return res; });
+                    return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' + this._scopes + '&response_type=token').map(function (res) { return res.url; });
                 };
                 InstagramService.prototype.getGallery = function () {
-                    this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + InstagramService.getCookie('token')).map(function (res) { return res.json(); });
-                    //console.log(json);
-                    console.log(InstagramService.extractTokenUrl());
+                    console.log(InstagramService.getCookie('token'));
+                    return this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + InstagramService.getCookie('token')).map(function (res) { return res.json(); });
+                    console.log(this.extractTokenUrl());
                 };
-                InstagramService.extractTokenUrl = function () {
+                InstagramService.prototype.extractTokenUrl = function () {
                     var urlarray;
                     var t = window.location.href;
                     urlarray = t.split('access_token=');
-                    if (urlarray != null)
+                    console.log(urlarray);
+                    if (urlarray[1] != null)
                         InstagramService.setCookie('token', urlarray[1], 1);
                     return InstagramService.getCookie('token');
                 };
@@ -60,12 +61,12 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                 InstagramService.getCookie = function (name) {
                     var ca = document.cookie.split(';');
                     var caLen = ca.length;
-                    var cookieName = name + "=";
+                    var cookieName = name;
                     var c;
                     for (var i = 0; i < caLen; i += 1) {
                         c = ca[i].replace(/^\s\+/g, "");
-                        if (c.indexOf(cookieName) == 0) {
-                            return c.substring(cookieName.length, c.length);
+                        if (c.indexOf(cookieName) == 1) {
+                            return c.substring(cookieName.length + 2, c.length);
                         }
                     }
                     return "";

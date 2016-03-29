@@ -11,7 +11,7 @@ export class InstagramService {
     url: string;
     private _clientid = 'f6f5aa12a4ac4a198be1b65f7c12160a';
     private _clientsecret = '0bd1d78e05594e54895c0b9d010cf28a';
-    private _redirecturi = 'http://localhost:8080';
+    private _redirecturi = 'http://localhost:8080/gallery';
     private _baseUrl = 'https://api.instagram.com/v1/';
     private API_OAUTH_URL = 'https://api.instagram.com/oauth/authorize';
     private API_OAUTH_TOKEN_URL = 'https://api.instagram.com/oauth/access_token';
@@ -20,26 +20,24 @@ export class InstagramService {
 
 
     getLoginUrl() {
-            return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' +this._scopes+ '&response_type=token').map((res:Response)=> res);
+            return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' +this._scopes+ '&response_type=token').map((res:Response)=> res.url);
     }
 
 
     getGallery(){
-
-        this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token='+InstagramService.getCookie('token')).map((res:Response) => res.json());
-        //console.log(json);
-        console.log(InstagramService.extractTokenUrl());
+        console.log(InstagramService.getCookie('token'));
+        return this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token='+InstagramService.getCookie('token')).map((res:Response) => res.json());
+        console.log(this.extractTokenUrl());
     }
 
-    static extractTokenUrl () {
+    extractTokenUrl() {
         let urlarray;
         var t = window.location.href ;
         urlarray = t.split('access_token=');
-        if(urlarray != null)
+        console.log(urlarray);
+        if(urlarray[1] != null)
             InstagramService.setCookie('token',urlarray[1],1);
-
         return InstagramService.getCookie('token');
-
     }
 
     static setCookie(name: string, value: string, expireDays: number, path: string = "") {
@@ -52,13 +50,13 @@ export class InstagramService {
     static getCookie(name: string) {
         let ca: Array<string> = document.cookie.split(';');
         let caLen: number = ca.length;
-        let cookieName = name + "=";
+        let cookieName = name;
         let c: string;
 
         for (let i: number = 0; i < caLen; i += 1) {
             c = ca[i].replace(/^\s\+/g, "");
-            if (c.indexOf(cookieName) == 0) {
-                return c.substring(cookieName.length, c.length);
+            if (c.indexOf(cookieName) == 1) {
+                return c.substring(cookieName.length+2, c.length);
             }
         }
         return "";

@@ -33,23 +33,17 @@ System.register(['angular2/core', "./login.component", "../services/instagram.se
                     this._instagramService = _instagramService;
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    this._instagramService.getLoginUrl().subscribe(function (data) {
-                        console.log(data);
-                        //this.url = data;
-                    });
-                    this._instagramService.getGallery();
-                };
-                AppComponent.prototype.getLoginUrl = function () {
-                    this._instagramService.getLoginUrl();
+                    this._instagramService.extractTokenUrl();
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         templateUrl: 'app/templates/app.html',
                         providers: [instagram_services_1.InstagramService],
-                        directives: [login_component_1.LoginComponent]
+                        directives: [router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
+                        { path: '/login', name: 'Login', component: login_component_1.LoginComponent, useAsDefault: true },
                         { path: '/gallery', name: 'Gallery', component: gallery_component_1.GalleryComponent },
                     ]), 
                     __metadata('design:paramtypes', [instagram_services_1.InstagramService])

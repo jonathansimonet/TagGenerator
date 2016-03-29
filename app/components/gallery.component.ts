@@ -7,17 +7,18 @@ import {RouteConfig} from "angular2/router";
     templateUrl: 'app/templates/gallery.html',
     providers: [InstagramService]
 })
-@RouteConfig([
-    {path:'/gallery', name: 'Gallery', component: GalleryComponent},
-
-])
 export class GalleryComponent {
     url: string;
+    medias: Array<string>;
     constructor(private _instagramService:InstagramService) {
 
     }
-
     ngOnInit(){
-        //this.url = this._instagramService.getOAuthToken();
+        this._instagramService.getGallery().subscribe(
+            (gallery) => {
+                console.log(gallery);
+               this.medias = gallery.data;
+            }
+        );
     }
 }

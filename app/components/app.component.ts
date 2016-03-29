@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {LoginComponent} from "./login.component";
 import {InstagramService} from "../services/instagram.services";
-import {RouteConfig} from "angular2/router";
+import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 import {GalleryComponent} from "./gallery.component";
 import {Observable} from 'rxjs/Rx';
 
@@ -9,10 +9,11 @@ import {Observable} from 'rxjs/Rx';
     selector: 'my-app',
     templateUrl: 'app/templates/app.html',
     providers: [InstagramService],
-    directives: [LoginComponent]
+    directives: [ROUTER_DIRECTIVES]
 })
 
 @RouteConfig([
+    {path:'/login', name:'Login', component: LoginComponent, useAsDefault: true},
     {path:'/gallery', name: 'Gallery', component: GalleryComponent},
 
 ])
@@ -21,20 +22,7 @@ export class AppComponent {
 
     }
 
-    url: String;
-
     ngOnInit(){
-         this._instagramService.getLoginUrl().subscribe(
-            (data) => {
-                console.log(data);
-                //this.url = data;
-            }
-        );
-
-        this._instagramService.getGallery();
-    }
-
-    getLoginUrl() {
-        this._instagramService.getLoginUrl();
+        this._instagramService.extractTokenUrl();
     }
 }
