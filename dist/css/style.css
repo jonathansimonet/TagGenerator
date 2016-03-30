@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -45,6 +46,368 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+#content2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../img/background-login.jpg') no-repeat center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#content2 .login {
+  position: absolute;
+  top: 20%;
+  left: 33%;
+  width: 34%;
+  background-color: #fff;
+  text-align: center;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  border-radius: 0.5em;
+  -moz-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=rgba(0, 0, 0, 0.2), Direction=NaN, Strength=10);
+}
+#content2 .login .logo {
+  margin: 8% 15%;
+  padding-bottom: 2em;
+  border-bottom: 1px solid #b3b3b3;
+}
+#content2 .login .logo img {
+  max-width: 100%;
+}
+#content2 .login .btnnn {
+  display: block;
+  margin: 8% 15%;
+}
+#content2 .login .btnnn input {
+  position: relative;
+  padding: 0.5em 1.5em;
+  border: 2px solid #6f6cdb;
+  font-size: 0.9em;
+  width: auto;
+  width: -webkit-calc(100% - 5em);
+  width: -moz-calc(100% - 5em);
+  width: calc(100% - 5em);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+  color: #6f6cdb;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+}
+#content2 .login .btnnn img {
+  height: 2.4em;
+  margin-left: 1em;
+  cursor: pointer;
+}
+header {
+  position: relative;
+  width: 100%;
+  height: 4em;
+}
+header .logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #f1f0f0;
+  width: 25%;
+  height: 100%;
+  text-align: center;
+}
+header .logo img {
+  position: relative;
+  top: 0.5em;
+  max-width: 100%;
+  max-height: 3em;
+}
+header .search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 75%;
+  height: 100%;
+}
+header .search input {
+  position: relative;
+  top: 1em;
+  margin-left: 2em;
+  padding: 0.5em 1.5em;
+  background-color: #f1f0f0;
+  border: 2px solid #6f6cdb;
+  font-size: 0.9em;
+  width: 30%;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+header .search img {
+  position: relative;
+  right: 3em;
+  top: 0.8em;
+  height: 1em;
+}
+header .menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+header .menu img {
+  position: relative;
+  margin-right: 1em;
+  top: 1.3em;
+  height: 1.4em;
+  cursor: pointer;
+}
+aside {
+  position: relative;
+  width: 25%;
+  display: inline-block !important;
+}
+aside .profile {
+  position: relative;
+  padding-bottom: 2em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+aside .profile img {
+  position: relative;
+  margin-left: 1em;
+  margin-top: 1em;
+  width: 4em;
+  float: left;
+}
+aside .profile .desc {
+  display: inline-block;
+  text-align: left;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+aside .profile .desc h3 {
+  font-weight: 700;
+}
+aside .profile .desc span {
+  color: #b3b3b3;
+}
+aside .profile:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 60%;
+  height: 1px;
+  background-color: #b3b3b3;
+}
+aside .populaires,
+aside .recents {
+  position: relative;
+  margin-top: 1em;
+  padding: 1em;
+}
+aside .populaires h3,
+aside .recents h3 {
+  font-weight: 700;
+  margin-bottom: 1em;
+  margin-left: 0.3em;
+}
+aside .populaires .hashtag,
+aside .recents .hashtag {
+  display: inline-block;
+  border: 2px solid #6f6cdb;
+  border-radius: 1.5em;
+  font-size: 0.9em;
+  padding: 0.3em 1em;
+  margin: 0.3em 0.4em;
+}
+aside .poster {
+  position: relative;
+  text-align: center;
+  margin-top: 3em;
+}
+aside .poster .btn {
+  width: 8em;
+}
+.btn {
+  display: inline-block;
+  background-color: #6f6cdb;
+  border-radius: 1.5em;
+  font-size: 0.9em;
+  padding: 0.3em 1em;
+  margin: 0.3em;
+  font-weight: 700;
+  color: #fff;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+.btn:hover {
+  opacity: 0.9;
+}
+#content {
+  position: relative;
+  float: right;
+  width: 75%;
+  display: inline-block;
+  background-color: #f1f0f0;
+}
+#content section {
+  position: relative;
+  clear: both;
+  display: inline-block;
+  width: 30%;
+  margin: 1em 1.5%;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 0.75em;
+}
+#content section .img {
+  position: relative;
+  width: 100%;
+  height: 15em;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#content section h3 {
+  padding: 0.5em 1em 0 1em;
+  font-weight: 700;
+}
+#content section .hashtags {
+  padding: 0 0.8em 0.7em 0.8em;
+}
+#content section .hashtags .hashtag {
+  margin: 0 0.3em;
+  font-size: 0.8em;
+}
+#content section .like {
+  float: right;
+  position: relative;
+  margin-right: 0.8em;
+  margin-top: 0.5em;
+  padding-bottom: 0.6em;
+}
+#content section .like img {
+  height: 1em;
+}
+.clear {
+  clear: both;
+}
+/*.img-click {
+	position: fixed;
+	top: 0; left: 0;
+	height: 100%; width: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	.content*/
+.modal-body {
+  /*position: absolute;
+		clear: both;
+		display: inline-block;
+		width: 30%; height: 70%;
+		left: 35%; top: 15%;
+		background-color: #fff;
+		overflow: hidden;
+		border-radius: 0.75em;*/
+}
+.modal-body .img {
+  position: relative;
+  width: 100%;
+  height: 75%;
+  height: -webkit-calc(100% - 10em);
+  height: -moz-calc(100% - 10em);
+  height: calc(100% - 10em);
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.modal-body h3 {
+  padding: 0.5em 1em 0 1em;
+  font-weight: 700;
+}
+.modal-body .hashtags {
+  padding: 0 0.8em 0.7em 0.8em;
+  overflow: hidden;
+}
+.modal-body .hashtags .hashtag {
+  margin: 0 0.3em;
+  font-size: 0.8em;
+}
+.modal-body .like {
+  float: right;
+  position: relative;
+  margin-right: 0.8em;
+  margin-top: 0.5em;
+}
+.modal-body .like img {
+  height: 1em;
+}
+.modal-body input {
+  position: relative;
+  margin-left: 1em;
+  padding: 0.5em 1em;
+  background-color: #f1f0f0;
+  border: 2px solid #6f6cdb;
+  font-size: 0.9em;
+  width: auto;
+  width: -webkit-calc(100% - 2em);
+  width: -moz-calc(100% - 2em);
+  width: calc(100% - 2em);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  border-radius: 1em;
+}
+.modal-body .btn {
+  float: right;
+  margin-right: 1em;
+  margin-top: 0.5em;
+  width: 4em;
+}
+.modal-body .btn img {
+  max-width: 70%;
+}
+.close {
+  position: absolute;
+  bottom: 87%;
+  left: 67%;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+.close:hover {
+  opacity: 0.6;
+}
+.close img {
+  width: 1.2em;
 }
 body {
   font-family: "sans-serif";
