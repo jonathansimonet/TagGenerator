@@ -22,6 +22,10 @@ export class InstagramService {
             return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' +this._scopes+ '&response_type=token').map((res:Response)=> res.url);
     }
 
+    getUser(){
+        return this.http.get('https://api.instagram.com/v1/users/self/?access_token='+InstagramService.getCookie('token')).map((res:Response) => res.json());
+    }
+
 
     getGallery(){
         console.log(InstagramService.getCookie('token'));

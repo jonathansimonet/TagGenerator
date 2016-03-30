@@ -20,7 +20,12 @@ export class GalleryComponent {
     listtags: Array<string>;
     username_profile: string;
     photo_profile: string;
+    user_data: string;
+    user_follows: string;
+    user_count_media: string;
+    user_followed_by: string;
     commentForm: ControlGroup;
+    idmedia: string;
 
     @ViewChild('myModal')
     modal: ModalComponent;
@@ -43,28 +48,36 @@ export class GalleryComponent {
                 this.username_profile = gallery.data[0].user.username;
                 this.photo_profile = gallery.data[0].user.profile_picture;
                 this.medias = gallery.data;
+                console.log(this.medias);
 
             }
         );
-        this.commentForm = this._fb.group({
-            "id": ['', Validators.required],
-            "comment": ['', Validators.required]
-        });
+
+        this._instagramService.getUser().subscribe(
+            (gallery) => {
+                this.user_follows = gallery.data.counts.follows;
+                this.user_count_media = gallery.data.counts.media;
+                this.user_followed_by = gallery.data.counts.followed_by;
+
+
+            }
+        );
     }
 
-    getTag(url: string){
+    getTag(url: string, id:string){
         this._imaggaService.getTag(url).subscribe(
             (data) => {
                 this.listtags =  data.results[0].tags;
             }
 
         );
+        this.idmedia = id;
     }
 
     addComment(){
-        console.log(this.commentForm.value);
-        //this._instagramService.addComment(id,text);
+        this._instagramService.addComment(this.idmedia,this.commentForm.value.comment).subscribe(
+            () => console.log('Comment Complete')
+        );
     }
-
 
 }

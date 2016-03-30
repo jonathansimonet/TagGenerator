@@ -36,6 +36,9 @@ System.register(['angular2/http', 'rxjs/Rx', 'angular2/core'], function(exports_
                 InstagramService.prototype.getLoginUrl = function () {
                     return this.http.get(this.API_OAUTH_URL + '?client_id=' + this._clientid + '&redirect_uri=' + this._redirecturi + '&scope=' + this._scopes + '&response_type=token').map(function (res) { return res.url; });
                 };
+                InstagramService.prototype.getUser = function () {
+                    return this.http.get('https://api.instagram.com/v1/users/self/?access_token=' + InstagramService.getCookie('token')).map(function (res) { return res.json(); });
+                };
                 InstagramService.prototype.getGallery = function () {
                     console.log(InstagramService.getCookie('token'));
                     return this.http.get('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + InstagramService.getCookie('token')).map(function (res) { return res.json(); });

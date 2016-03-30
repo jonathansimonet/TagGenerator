@@ -46,21 +46,23 @@ System.register(['angular2/core', "../services/instagram.services", "../services
                         _this.username_profile = gallery.data[0].user.username;
                         _this.photo_profile = gallery.data[0].user.profile_picture;
                         _this.medias = gallery.data;
+                        console.log(_this.medias);
                     });
-                    this.commentForm = this._fb.group({
-                        "id": ['', common_1.Validators.required],
-                        "comment": ['', common_1.Validators.required]
+                    this._instagramService.getUser().subscribe(function (gallery) {
+                        _this.user_follows = gallery.data.counts.follows;
+                        _this.user_count_media = gallery.data.counts.media;
+                        _this.user_followed_by = gallery.data.counts.followed_by;
                     });
                 };
-                GalleryComponent.prototype.getTag = function (url) {
+                GalleryComponent.prototype.getTag = function (url, id) {
                     var _this = this;
                     this._imaggaService.getTag(url).subscribe(function (data) {
                         _this.listtags = data.results[0].tags;
                     });
+                    this.idmedia = id;
                 };
                 GalleryComponent.prototype.addComment = function () {
-                    console.log(this.commentForm.value);
-                    //this._instagramService.addComment(id,text);
+                    this._instagramService.addComment(this.idmedia, this.commentForm.value.comment).subscribe(function () { return console.log('Comment Complete'); });
                 };
                 __decorate([
                     core_1.ViewChild('myModal'), 
